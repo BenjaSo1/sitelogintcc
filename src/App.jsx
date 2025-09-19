@@ -1,9 +1,13 @@
-import { useState } from "react";
 import './styles/App.css'
+import Navbar from './utils/navbar'
+import Card from './utils/card.jsx'
 
 function App() {
     return (
- <h1>teste</h1>
+        <div>
+        <Navbar/>  
+        <Card/>  
+        </div>
     )
 }
 

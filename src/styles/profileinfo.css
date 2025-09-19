@@ -1,0 +1,13 @@
+.containerprofileinfo {
+    display: flex;
+    height: 20vh;
+    width: 20vw;
+}
+
+.bordaprofileinfo {
+    display: flex;
+    align-items: center;
+    border: 2px solid #dedc21;
+    height: 20vh;
+    width: 20vw;
+}

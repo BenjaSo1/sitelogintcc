@@ -1,0 +1,14 @@
+.container-navbar {
+    display: flex;
+    height: 20vh;
+    width: 100vw;
+    margin-bottom: -30px;
+}
+
+.navbar {
+    height: 20vh;
+    width: 100vw;
+    background: #9333EA;
+    background: linear-gradient(180deg, rgba(147, 51, 234, 1) 0%, rgba(75, 0, 130, 1) 53%, rgba(69, 44, 99, 1) 100%);
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}

@@ -1,0 +1,25 @@
+.containercard {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 30vw;
+    margin: 0 auto;
+}
+
+.bordacard {
+    position: absolute;
+    z-index: 2;
+    border-radius: 5%;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px, rgb(51, 51, 51) 0px 0px 0px 3px;
+    background: #121212;
+    height: 100vh;
+    width: 30vw;
+}
+
+
+.profileinfocard {
+  display: flex;
+  justify-content: center;
+}
