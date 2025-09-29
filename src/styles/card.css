@@ -6,7 +6,6 @@ body {
 
 .containercard {
     z-index: 1;
-    padding-top: 70px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,10 +14,10 @@ body {
     box-sizing: border-box;
 }
 
-
-
 .bordacard {
     width: 100%;
+    height: 95vh;
+    border: 1px solid #00d5ff;
     max-width: 400px;
     background-color: #000000;
     border-radius: 24px;
@@ -30,12 +29,10 @@ body {
 .cimacard {
     background: linear-gradient(160deg, #000000, #000000);
     min-height: 120px;
-    padding-bottom: 60px; 
 }
 
 .profileinfocard {
     position: relative;
-    margin-top: -80px;
     padding: 0 16px;
 }
 
