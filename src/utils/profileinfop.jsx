@@ -1,27 +1,10 @@
-import '../styles/profileinfo.css'
-import { useState, useEffect } from 'react'
-import { useParams } from 'react-router'
-import axios from 'axios'
+import "../styles/profileinfop.css" 
 
-function Profileinfo() {
-    const { username } = useParams();
-    const [ perfil, setPerfil ] = useState('null')
-
-    useEffect(() => {
-        axios.get(`http://localhost:3001/p/${username}`)
-            .then(response => {
-                setPerfil(response.data);
-            })
-            .catch (err => {
-                console.error("Perfil não encontrado");
-            });
-    }, [username]);
-
-    if (!perfil) return <div style={{color:'white', textAlign:'center', marginTop:'50px'}}>Carregando cartão...</div>;
+function Cardpublic() {
 
 
     return (
-        <div className="containerprofileinfo">
+ <div className="containerprofileinfo">
 
             <div className='bordaprofileinfo'>
 
@@ -31,8 +14,8 @@ function Profileinfo() {
 
             <div className="fotoprofileinfo">
                 <img src="/fotopessoa.webp" className="fotopessoaperfil"></img>
-                <strong>{perfil.nome}</strong>
-                <span>Programador</span>
+                <input>{perfil.nome}</input>
+                <input>Programador</input>
             </div>
 
          </div> {/* containerprofileinfop */}
@@ -151,4 +134,5 @@ function Profileinfo() {
     )
 }
 
-export default Profileinfo
+
+export default Cardpublic

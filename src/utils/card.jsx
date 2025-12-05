@@ -1,7 +1,6 @@
 import '../styles/card.css'
-import Profileinfo from "./profileinfo";
 
-function Card() {
+function Card({ children }) {
     return (
 
     <div className="containercard">
@@ -9,9 +8,8 @@ function Card() {
 
 
         <div className="profileinfocard">
-        <Profileinfo/>
         </div> {/* profiloinfocard */}
-
+            { children }
 
         </div> {/* bordacard */}
 
