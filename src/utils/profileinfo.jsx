@@ -4,18 +4,46 @@ import { useParams } from 'react-router'
 import axios from 'axios'
 
 function Profileinfo() {
-    const { username } = useParams();
-    const [ perfil, setPerfil ] = useState('null')
+    const dadosMock = {
+    nome: "Nome Exemplo",
+    titulo: "Programador",
+    username: 'balau',
+    foto_url: "/fotopessoa.webp",
+    descricao: "WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW",
+    email: "teste@gmail.com",
+    pix: "chavepixmock123",
+    instagram_url: "https://instagram.com/mock",
+    whatsapp_numero: "5511999999999",
+    maps_url: "https://www.google.com.br/maps/place/GDESTE/@-3.7421056,-38.5384448,15z/data=!4m6!3m5!1s0x7c749a8ed597dc1:0xa48662fdf89a2c35!8m2!3d-3.7441952!4d-38.5358472!16s%2Fg%2F11h03h12t1?hl=pt-BR&entry=ttu&g_ep=EgoyMDI2MDExMy4wIKXMDSoASAFQAw%3D%3D"
+};
 
-    useEffect(() => {
-        axios.get(`http://localhost:3001/p/${username}`)
-            .then(response => {
-                setPerfil(response.data);
-            })
-            .catch (err => {
-                console.error("Perfil não encontrado");
-            });
-    }, [username]);
+    const { username } = useParams();
+    const [ perfil, setPerfil ] = useState(dadosMock)
+    const [ imageFile, setImageFile ] = useState(null)
+    const [ previewUrl, setPreviewUrl] = useState(null)
+    const backendURL = "http://localhost:3000";
+
+    function handleimagechange() {
+    const file = e.target.files[0];
+    if (file) {
+        setImageFile(file);
+        setPreviewUrl(URL.createObjectURL(file))
+    }
+    };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        
+        setPerfil(prevPerfil => ({
+            ...prevPerfil,
+            [name]: value 
+        }));
+    };
+
+    const handleSave = () => {
+        console.log("Dados salvos:", perfil);
+        alert("Alterações salvas! (Verifique o console)");
+    };
 
     if (!perfil) return <div style={{color:'white', textAlign:'center', marginTop:'50px'}}>Carregando cartão...</div>;
 
@@ -30,10 +58,38 @@ function Profileinfo() {
             <div className='containerprofileinfop'>
 
             <div className="fotoprofileinfo">
-                <img src="/fotopessoa.webp" className="fotopessoaperfil"></img>
-                <strong>{perfil.nome}</strong>
-                <span>Programador</span>
-            </div>
+                <img 
+                src={previewUrl || (perfil.foto_url.startsWith('/') ? perfil.foto_url : `${backendURL}${perfil.foto_url}`)} 
+                className="fotopessoaperfil" 
+                alt="Foto de perfil"
+                />
+                <label className="botao-trocar-foto">
+                    <span style={{ fontSize: '20px' }}>📷</span>
+                    <span>Alterar Foto</span>
+                    <input 
+                         type="file" 
+                        accept="image/*" 
+                        onChange={handleimagechange} 
+                        style={{ display: 'none' }} 
+                    />
+                </label>
+                </div>
+                <div className='inputnome'>
+                <textarea className='nomeedi' name='nome' value={perfil.nome} onChange={handleChange} maxLength={50} placeholder='Digite seu nome e sobrenome'>
+                {perfil.nome}
+                </textarea>
+                <span style={{fontSize: '10px', color: '#555'}}>
+                {perfil.nome.length}/50
+                </span>
+                </div>
+                
+                <div className='inputtitulo'>
+                <textarea className='tituloedi' name='titulo' value={perfil.titulo} onChange={handleChange} maxLength={50} placeholder='Digite sua profissão'>
+                {perfil.titulo}</textarea>
+                <span style={{fontSize: '10px', color: '#555'}}>
+                {perfil.titulo.length}/50
+                </span>
+                </div>
 
          </div> {/* containerprofileinfop */}
 
@@ -65,25 +121,25 @@ function Profileinfo() {
                 <div className='segundalinha'> {/* Email, Whatsapp e maps */}
 
 
-                <a href={`mailto:${perfil.email}`}>
-                <button>
-                    <img src='/icons/mail.svg' alt='Logo do Email'></img>
+                <a href={`https://mail.google.com/mail/?view=cm&fs=1&to=${perfil.email}`} target='_blank' rel='noopenner noreferrer'>
+                <div className='botoeslogos'>
+                    <img src='/icons/mail.svg' alt='Logo do Email'/>
                     <span>Gmail</span>
-                </button>
+                </div>
                 </a>
 
-                <a href='' target='_blank' rel='noopenner noreferrer'>
-                <button>
-                    <img src='/icons/whatsapp.svg' alt='Logo do Whatsapp'></img>
+                <a href={`https://wa.me/55${perfil.whatsapp_numero}`} target='_blank' rel='noopenner noreferrer'>
+                <div className='botoeslogos'>
+                    <img src='/icons/whatsapp.svg' alt='Logo do Whatsapp'/>
                     <span>Whatsapp</span>
-                </button>
+                </div>
                 </a>
 
-                <a href='https://maps.app.goo.gl/8HwSN6yCE74rZGkSA' target='_blank' rel='noopenner noreferrer'>
-                <button>
-                    <img src='/icons/maps.svg' alt='Logo do Whatsapp'></img>
+                <a href={perfil.maps_url} target='_blank' rel='noopenner noreferrer' className='botoeslogos'>
+                <div className='botoeslogos'>
+                    <img src='/icons/maps.svg' alt='Logo do Whatsapp'/>
                     <span>Mapa</span>
-                </button>
+                </div>
                 </a>
 
 
@@ -95,52 +151,46 @@ function Profileinfo() {
 
             <div className='Mediocardp'>
 
-            <div className='Descricaomediop'>
-
-            </div> {/* Descricaomediop */}
             <div className='barracimadescricao'>
 
             </div>
 
-            <span>{perfil.descricao}</span>
+            <textarea 
+            className='descricaoedi'
+            name='descricao'
+            value={perfil.descricao}
+            onChange={handleChange}
+            maxLength={150}
+            placeholder='Escreva uma breve descrição sobre você'
+            >
+                {perfil.descricao}
+            </textarea>
+            <span style={{fontSize: '10px', color: '#555'}}>
+            {perfil.descricao.length}/150
+            </span>
 
             <div className='barrabaixodescricao'>
-
-
             </div>
 
             </div> {/* Mediocardp */}
 
             <div className='Baixocardp'>
-            <a href='' target='_blank' rel='noopener noreferrer'>
-             <button>
-                <img src='/icons/pix.svg' alt='Logo do Pix'></img>
-                <span>Pix</span>
+             <input className='inputbaixocard' placeholder='Digite sua chave pix' name='pix' value={perfil.pix} onChange={handleChange}/>
+
+             <input className='inputbaixocard' placeholder='Digite seu número de whatsapp aqui ex: 5585999999999' name='maps_url' value={perfil.whatsapp_numero} onChange={handleChange}/>
+
+             <input className='inputbaixocard' placeholder='Digite seu email aqui' name='email' value={perfil.email} onChange={handleChange}/>
+
+    
+             <input className='inputbaixocard' placeholder='Cole o link do seu instagram aqui' name='instagram_url' value={perfil.instagram_url} onChange={handleChange}/>
+
+
+             <input className='inputbaixocard' placeholder='Cole o link do maps de onde trabalha aqui' name='maps_url' value={perfil.maps_url} onChange={handleChange}/>
+
+
+            <button onClick={handleSave} className='botaodesalvar'>
+                Salvar Alterações
             </button>
-            </a>
-
-
-            <a href='' target='_blank' rel='noopener noreferrer'>
-            <button>
-                <img src='/icons/mail.svg' alt='Logo do Email'></img>
-                <span>Email</span>
-            </button>
-            </a>
-
-            <a href='' target='_blank' rel='noopener noreferrer'>
-             <button>
-                <img src='/icons/instagram.svg' alt='Logo do Instagram'></img>
-                <span>Instagram</span>
-            </button>
-            </a>
-
-
-            <a href='' target='_blank' rel='noopener noreferrer'>
-             <button>
-                <img src='/icons/whatsapp.svg' alt='Logo do Whatsapp'></img>
-                <span>Whatsapp</span>
-            </button>
-            </a>
 
 
             </div> {/* Baixocardp */}

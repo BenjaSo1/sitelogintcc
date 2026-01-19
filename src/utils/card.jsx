@@ -5,12 +5,7 @@ function Card({ children }) {
 
     <div className="containercard">
         <div className="bordacard">
-
-
-        <div className="profileinfocard">
-        </div> {/* profiloinfocard */}
             { children }
-
         </div> {/* bordacard */}
 
         </div>

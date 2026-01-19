@@ -12,8 +12,8 @@ function Logincard() {
         <button type="submit" className="botaologin">login</button>
         <button type='submit' className="Ess">Esqueceu sua senha?</button>
         </form>
-        </div> {/* Container login */}
-        </div> {/* Bordacardlogin */}
+        </div> 
+        </div>
         </div>
     )
 }
